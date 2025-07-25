@@ -1,3 +1,4 @@
+/* API Retrieval & Processing */
 async function getWeather(location) {
     const baseUrl = 'https://visual-crossing-weather.p.rapidapi.com/forecast';
     const params = new URLSearchParams({
@@ -45,9 +46,19 @@ function processData(result, location){
     return processedData;
 }
 
+
+/* Location Dropdown */
+const locationDropdown = document.getElementById('location-dropdown');
+let selectedLocation = locationDropdown.value;
+
+
+locationDropdown.addEventListener('change', () => {
+    selectedLocation = locationDropdown.value;
+  });
+
 (async () => {
-    const detLocation = 'Washington,DC,USA';
-    const weatherData = await getWeather(detLocation);
-    const processed = processData(weatherData, detLocation);
+    const weatherData = await getWeather(selectedLocation);
+    const processed = processData(weatherData, selectedLocation);
     console.log(processed);
 })();
+
